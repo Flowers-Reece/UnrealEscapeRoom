@@ -14,6 +14,17 @@ $RECYCLE.BIN/
 *.msm
 *.msp
 
+# Unreal Engine Files
+*/Build
+*/Binaries
+*/DerivedDataCache
+*/Intermediate
+*/Saved
+*/Content/StarterContent
+
+#Visual Studio db
+*.VC.db
+
 # Windows shortcuts
 *.lnk
 
@@ -45,3 +56,4 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+EscapeRoom2/Content/StarterContent/Textures/T_Chair_M.uasset
