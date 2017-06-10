@@ -19,11 +19,16 @@ UOpenDoor::UOpenDoor()
 void UOpenDoor::BeginPlay()
 {
 	Super::BeginPlay();
-	AActor *Door = GetOwner();
-	FRotator NewRotation = FRotator(0.0f,-80.0f,0.0f);
-	Door->SetActorRotation(NewRotation);
+	ActorThatOpens = GetWorld()->GetFirstPlayerController()->GetPawn();
 	// ...
 	
+}
+
+void UOpenDoor::OpenDoor()
+{
+	AActor *Door = GetOwner();
+	FRotator NewRotation = FRotator(0.0f, -80.0f, 0.0f);
+	Door->SetActorRotation(NewRotation);
 }
 
 
@@ -31,7 +36,13 @@ void UOpenDoor::BeginPlay()
 void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
+	//poll trigger volume
+	//if ActorThatOpens is in the volume
+	if (PressurePlate->IsOverlappingActor(ActorThatOpens))
+	{
+		OpenDoor();
+	}
+	
 	// ...
 
 }
