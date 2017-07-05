@@ -35,11 +35,26 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 	FVector PlayerViewPointLocation;
 	FRotator PlayerViewPointRotator;
 	
-	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(OUT PlayerViewPointLocation,OUT PlayerViewPointRotator);
-	UE_LOG(LogTemp, Warning, TEXT("Player Location: %s View Location: %s"), *PlayerViewPointLocation.ToString(),*PlayerViewPointRotator.ToString());
-	//Ray-cast out to reach distance  and need a reach distance
-	//see what we hit
 
-	// ...
+	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(OUT PlayerViewPointLocation,OUT PlayerViewPointRotator);
+	//UE_LOG(LogTemp, Warning, TEXT("Player Location: %s View Location: %s"), *PlayerViewPointLocation.ToString(),*PlayerViewPointRotator.ToString());
+	
+	FVector LineTraceEnd = PlayerViewPointLocation + (PlayerViewPointRotator.Vector() * Reach);
+	///DrawDebugLine(GetWorld(), PlayerViewPointLocation, LineTraceEnd, FColor(255, 0, 0), false, 0.f, 0.f,10.f);
+	//Setup Query Parameters
+	FCollisionQueryParams TraceParameters (FName(TEXT(" ")), false, GetOwner());
+
+	//Line trace (Ray Cast)
+	FHitResult Hit;
+	GetWorld()->LineTraceSingleByObjectType(
+		OUT Hit,
+		PlayerViewPointLocation,
+		LineTraceEnd,
+		FCollisionObjectQueryParams(ECollisionChannel::ECC_PhysicsBody),
+		TraceParameters);
+	AActor* ActorHit =Hit.GetActor();
+	if (ActorHit) {
+		UE_LOG(LogTemp, Warning, TEXT("Player is looking at %s"), *(ActorHit->GetName()))
+	}
 }
 
