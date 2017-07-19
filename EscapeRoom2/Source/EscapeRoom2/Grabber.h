@@ -48,4 +48,5 @@ private:
 
 	//Returns current player view point
 	FVector GetReachLineStart();
+
 };
