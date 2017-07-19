@@ -37,7 +37,6 @@ private:
 		float LastDoorOpenTime;
 		float CurrentTime;
 
-		
 		AActor *ActorThatOpens;   //Pawn inherits from actor
 		AActor *Owner; //the owning door
 };

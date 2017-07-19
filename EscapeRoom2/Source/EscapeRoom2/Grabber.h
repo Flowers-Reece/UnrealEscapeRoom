@@ -14,8 +14,11 @@ class ESCAPEROOM2_API UGrabber : public UActorComponent
 public:	
 	// Sets default values for this component's properties
 	UGrabber();
+
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
+	
 
 protected:
 	// Called when the game starts
@@ -23,7 +26,7 @@ protected:
 
 private:
 	float Reach = 120.f;
-	
+	//Instantiating the Physics Handle and InputComponent
 	UPhysicsHandleComponent* PhysicsHandle = nullptr;
 	UInputComponent* InputComponent = nullptr;
 
@@ -39,4 +42,10 @@ private:
 		
 	// Return hit for first physics body in reach
 	const FHitResult GetFirstPhysicsBodyInReach();
+
+	//Returns current end of Reach Line
+	FVector GetReachLineEnd();
+
+	//Returns current player view point
+	FVector GetReachLineStart();
 };
