@@ -93,6 +93,11 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	//if physics handle is attached
+	if (!PhysicsHandle)
+	{
+		return;
+	}
+		
 	if (PhysicsHandle->GrabbedComponent)
 	{
 		//move the obejct holding
